@@ -18,7 +18,7 @@ The app offers a smooth ordering experience with real-time notifications and sec
 ## ✨ Features
 
 - User authentication using access token & profile management  
-- Browse restaurants & menu details  
+- Browse food items & menu details  
 - Add to cart & place orders  
 - Order tracking & order details view  
 - Real-time push notifications (FCM)  
@@ -30,10 +30,9 @@ The app offers a smooth ordering experience with real-time notifications and sec
 ## 📸 Screenshots
 
 | Login | Home View | Menu Details | Order Tracking | Cart | Stripe Checkout | Order Details | Location Tracking |
-|-------|-----------|--------------|----------------|------|------------------|---------------|-------------------|
-| ![](assets/s.png) | ![](assets/s3.png) | ![](assets/s4.png) | ![](assets/s5.png) | ![](assets/s6.png) | ![](assets/s7.png) | ![](assets/s8.png) | ![](assets/s9.png) |
+|-------|-----------|--------------|----------------|------|----------------|---------------|-----------------|
+| ![Login Screen](assets/s.png) | ![Home View](assets/s3.png) | ![Menu Details](assets/s4.png) | ![Order Tracking](assets/s5.png) | ![Cart](assets/s6.png) | ![Stripe Checkout](assets/s7.png) | ![Order Details](assets/s8.png) | ![Location Tracking](assets/s9.png) |
 
-> **Image paths:** `assets/s.png`, `assets/s3.png`, `assets/s4.png`, `assets/s5.png`, `assets/s6.png`, `assets/s7.png`, `assets/s8.png`, `assets/s9.png`
 
 ---
 
