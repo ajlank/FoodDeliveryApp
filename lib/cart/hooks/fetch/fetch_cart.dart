@@ -33,10 +33,8 @@ CartResult fetchCart() {
   }
 
   useEffect(() {
-    if (accessToken != null) {
-      fetchData();
-    }
-    return;
+    fetchData();
+      return;
   }, const []);
 
   void refetch() {

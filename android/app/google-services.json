@@ -32,10 +32,10 @@
               "client_type": 3
             },
             {
-              "client_id": "364938733915-9t31sc1tlrv6ohnd6j1rjo6hira4bmjt.apps.googleusercontent.com",
+              "client_id": "364938733915-2inp9aeop326ma1i4tn9u47un4af9fe8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.foodapp"
               }
             }
           ]
@@ -68,10 +68,10 @@
               "client_type": 3
             },
             {
-              "client_id": "364938733915-9t31sc1tlrv6ohnd6j1rjo6hira4bmjt.apps.googleusercontent.com",
+              "client_id": "364938733915-2inp9aeop326ma1i4tn9u47un4af9fe8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.foodapp"
               }
             }
           ]
@@ -104,10 +104,10 @@
               "client_type": 3
             },
             {
-              "client_id": "364938733915-9t31sc1tlrv6ohnd6j1rjo6hira4bmjt.apps.googleusercontent.com",
+              "client_id": "364938733915-2inp9aeop326ma1i4tn9u47un4af9fe8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.foodapp"
               }
             }
           ]
@@ -140,10 +140,10 @@
               "client_type": 3
             },
             {
-              "client_id": "364938733915-9t31sc1tlrv6ohnd6j1rjo6hira4bmjt.apps.googleusercontent.com",
+              "client_id": "364938733915-2inp9aeop326ma1i4tn9u47un4af9fe8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.foodapp"
               }
             }
           ]

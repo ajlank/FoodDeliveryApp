@@ -7,6 +7,8 @@ import 'package:foodapp/bottomNavViews/widgets/offer/offer_view.dart';
 import 'package:foodapp/bottomNavViews/widgets/profile/profile_view.dart';
 import 'package:foodapp/bottomNavViews/widgets/foodpannelwidget/widgetviews/foodWidget/menu_details.dart';
 import 'package:foodapp/cart/views/cart_views.dart';
+import 'package:foodapp/location/screen/map_screen.dart';
+import 'package:foodapp/order/views/order_tracking_view.dart';
 import 'package:foodapp/order/views/order_view.dart';
 import 'package:foodapp/stripe_payment/constsval/consts.dart';
 import 'package:foodapp/uiController/getXController/home_view_controller.dart';
@@ -17,13 +19,16 @@ import 'package:foodapp/wishlist/views/wishlist_view.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey=stripePublishableKey;
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   await FirebaseApi().initNotifications();
   await GetStorage.init();
   runApp(const MyApp());
@@ -34,40 +39,70 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
 
       title: 'Food Delivery App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: ViewController(),
-      routes: {
-        loginRoute: (context) => LoginView(),
-        signUpRoute: (context) => SignUpView(),
-        homeRoute: (context) => MyHomeView(),
-        menuDetailsRoute: (context) => MenuDetails(),
-        cartRoute: (context) => CartViews(),
-      },
+      routerConfig: _router,
     );
   }
 }
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (BuildContext context, GoRouterState state) {
+        return const MyHomeView();
+      },  
+    ),
+       GoRoute(
+      path: loginRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return LoginView();
+      },  
+    ),
+     GoRoute(
+      path: signUpRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return SignUpView();
+      },  
+    ),
+      GoRoute(
+      path: menuDetailsRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return MenuDetails();
+      },  
+    ),
+    GoRoute(
+      path: cartRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return CartViews();
+      },  
+    ),
+    GoRoute(
+      path: orderTrackRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return OrderTrackingView();
+      },  
+    ),
+    GoRoute(
+      path: searchRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return SearchBar();
+      },  
+    ),
+       GoRoute(
+      path: mapScreenRoute,
+      builder: (BuildContext context, GoRouterState state) {
+        return MapScreen();
+      },  
+    ),
+  ],
+);
 
-class ViewController extends StatelessWidget {
-  const ViewController({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final accessToken = GetStorage().read('accessToken');
-    if (accessToken != null) {
-      return MyHomeView();
-    } else {
-      return SignUpView();
-    }
-  }
-}
-
-//main View
 class MyHomeView extends StatefulWidget {
   const MyHomeView({super.key});
 
@@ -87,8 +122,8 @@ class _MyHomeViewState extends State<MyHomeView> {
   @override
   Widget build(BuildContext context) {
     HomeViewController controller = Get.put(HomeViewController());
-
     return Obx(() {
+
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 235, 234, 233),
         bottomNavigationBar: BottomNavigationBar(
@@ -108,7 +143,7 @@ class _MyHomeViewState extends State<MyHomeView> {
               label: 'Offer',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.heart_broken_outlined),
+              icon: Icon(Icons.favorite_outline),
               label: 'Wishlist',
             ),
             BottomNavigationBarItem(

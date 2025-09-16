@@ -17,7 +17,7 @@ class FoodCard extends HookWidget {
       return CircularProgressIndicator();
     }
       final food = result.foods;
-  print(food.length);
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(

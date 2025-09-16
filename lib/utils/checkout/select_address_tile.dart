@@ -4,6 +4,7 @@ import 'package:foodapp/address/controller/address_controller.dart';
 import 'package:foodapp/address/model/address_model.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectAddressTile extends HookWidget {
   const SelectAddressTile({super.key, required this.address});
@@ -19,7 +20,7 @@ class SelectAddressTile extends HookWidget {
         onTap: () {
           controller.setAddress(address);
 
-          Navigator.of(context).pop();
+         context.pop();
         },
         contentPadding: EdgeInsets.zero,
         leading: CircleAvatar(

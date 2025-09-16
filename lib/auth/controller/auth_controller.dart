@@ -4,18 +4,29 @@ import 'package:foodapp/auth/model/user_model.dart';
 import 'package:foodapp/utils/routes.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 class AuthController extends GetxController {
-  final _isLoading = false.obs;
+  bool _isLoading = false;
 
-  bool get isLoading => _isLoading.value;
-
+  var isLoggedIn = false.obs;
+  bool get isLoading => _isLoading;
+ 
+@override
+  void onInit() {
+    super.onInit();
+    // Restore auth state from storage
+    final token = GetStorage().read('token');
+    if (token != null) {
+      isLoggedIn.value = true;
+    }
+  }
   void setLoading() {
-    _isLoading.value = !_isLoading.value;
+    _isLoading= !_isLoading;
   }
 
-  void loginFunc(String data, BuildContext ctx) async {
+void loginFunc(String data, BuildContext ctx) async {
     setLoading();
 
     try {
@@ -26,18 +37,26 @@ class AuthController extends GetxController {
         body: data,
       );
       if (response.statusCode == 200) {
-        String accessToken = authTokenFromJson(response.body).authToken;
-        getUser(accessToken, ctx);
-        GetStorage().write('accessToken', accessToken);
-        Navigator.of(ctx).pushNamedAndRemoveUntil(homeRoute, (_)=>false);
+         
         setLoading();
+        String accessToken = authTokenFromJson(response.body).authToken;
+        GetStorage().write('accessToken', accessToken);
+        isLoggedIn.value = true;
+
+         getUser(accessToken, ctx);
+       ctx.go('/');
+    
       }
     } catch (e) {
       setLoading();
     }
   }
-
-  void registerFunc(String data) async {
+  void logout(BuildContext context) {
+    GetStorage().remove('token');
+    isLoggedIn.value = false;
+    context.go(loginRoute);
+  }
+void registerFunc(String data) async {
     setLoading();
 
     try {
@@ -47,11 +66,11 @@ class AuthController extends GetxController {
         headers: {'Content-Type': 'application/json'},
         body: data,
       );
-      print(response.statusCode);
       if (response.statusCode == 201) {
         String accessToken = authTokenFromJson(response.body).authToken;
 
         GetStorage().write('accessToken', accessToken);
+        
         setLoading();
       } else if (response.statusCode == 400) {
         setLoading();
@@ -75,9 +94,11 @@ class AuthController extends GetxController {
         },
       );
       if (response.statusCode == 200) {
+          setLoading();
         GetStorage().write(accessToken, response.body);
 
-       
+      
+    
       } else if (response.statusCode == 400) {
         setLoading();
       }
@@ -85,6 +106,10 @@ class AuthController extends GetxController {
       setLoading();
     }
   }
+
+  //Tomas
+//tomas@gmail.com
+//1234abcRw@#qqq
 
   UserModel? userData() {
     final accessToken = GetStorage().read('accessToken');

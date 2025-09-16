@@ -3,6 +3,7 @@ import 'package:foodapp/auth/controller/auth_controller.dart';
 import 'package:foodapp/auth/model/login_model.dart';
 import 'package:foodapp/utils/routes.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -34,56 +35,119 @@ class _LoginViewState extends State<LoginView> {
     AuthController authController = Get.put(AuthController());
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Login'),
-            SizedBox(height: 15),
-            TextField(
-              controller: _username,
-              decoration: InputDecoration(hintText: 'Enter your username'),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.orangeAccent, Colors.deepOrange],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
             ),
-            TextField(
-              controller: _password,
-              decoration: InputDecoration(hintText: 'Enter your password'),
+          ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // App Logo
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                      'https://www.nicepng.com/png/detail/131-1314271_food-icon-food-court-icon-png.png',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Welcome to Food Junction',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  // Username field
+                  TextField(
+                    controller: _username,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: const Icon(Icons.person),
+                      hintText: 'Username',
+                      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Password field
+                  TextField(
+                    controller: _password,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: const Icon(Icons.lock),
+                      hintText: 'Password',
+                      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  // Sign In Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final username = _username.text;
+                        final password = _password.text;
+                        LoginModel user = LoginModel(
+                          username: username,
+                          password: password,
+                        );
+                        String data = loginModelToJson(user);
+                        authController.loginFunc(data, context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.deepOrange,
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Text(
+                        'Sign In',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  // Register
+                  TextButton(
+                    onPressed: () {
+                     context.go(signUpRoute);
+                    },
+                    child: const Text(
+                      'Not registered yet? Register here',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 12),
-            TextButton(
-              onPressed: () {
-                final username = _username.text;
-                final password = _password.text;
-                LoginModel user = LoginModel(
-                  username: username,
-                  password: password,
-                );
-                String data = loginModelToJson(user);
-                print('Meow');
-                print(data);
-                authController.loginFunc(data, context);
-                Navigator.of(
-                  context,
-                ).pushNamedAndRemoveUntil(homeRoute, (_) => false);
-              },
-              child: const Text('Sign In'),
-            ),
-            SizedBox(height: 4),
-            TextButton(
-              onPressed: () {
-                Navigator.of(
-                  context,
-                ).pushNamedAndRemoveUntil(signUpRoute, (route) => false);
-              },
-              child: const Text('Not registered yet? register here'),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
-//Tomas
-//tomas@gmail.com
-//1234abcRw@#qqq

@@ -32,7 +32,7 @@ class AddressView extends HookWidget {
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    Icon(Icons.location_off_outlined),
+                    Icon(Icons.location_on_outlined),
                     SizedBox(width: 3),
                     Text(
                       ct.address.value != null

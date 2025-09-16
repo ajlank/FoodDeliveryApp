@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:foodapp/cart/model/cart_model.dart';
 
 CreateOrderModel createOrderFromJson(String str) =>
     CreateOrderModel.fromJson(json.decode(str));

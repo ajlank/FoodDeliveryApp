@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/auth/controller/auth_controller.dart';
 import 'package:foodapp/auth/model/user_model.dart';
 import 'package:foodapp/bottomNavViews/widgets/profile/profile_list_tile.dart';
-import 'package:foodapp/utils/routes.dart';
 import 'package:foodapp/views/auth/sign_up_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,7 +17,8 @@ class ProfileView extends StatelessWidget {
     }
     AuthController authController = Get.put(AuthController());
     UserModel? user = authController.userData();
-    return ListView(
+    return Scaffold(
+      body:  ListView(
       children: [
         Container(
           color: Colors.white,
@@ -69,11 +69,7 @@ class ProfileView extends StatelessWidget {
                   width: double.infinity,
                   child: TextButton(
                     onPressed: () {
-                      GetStorage().remove('accessToken');
-
-                      Navigator.of(
-                        context,
-                      ).pushNamedAndRemoveUntil(loginRoute, (_) => false);
+                    authController.logout(context);
                     },
                     child: const Text(
                       'LOGOUT',
@@ -89,6 +85,7 @@ class ProfileView extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }

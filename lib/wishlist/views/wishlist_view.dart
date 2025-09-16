@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:foodapp/views/auth/sign_up_view.dart';
+import 'package:foodapp/wishlist/controller/wishlist_controller.dart';
 import 'package:foodapp/wishlist/hooks/fetch/fetch_wishlist.dart';
+import 'package:get/instance_manager.dart';
 import 'package:get_storage/get_storage.dart';
 
 class WishlistView extends HookWidget {
@@ -9,18 +11,20 @@ class WishlistView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final result = fetchWishList();
-    final isLoading = result.isLoading;
-    final isError = result.error;
-
-    if (isLoading) {
-      return CircularProgressIndicator();
-    }
-    final wishList = result.foods;
     final accessToken = GetStorage().read('accessToken');
     if (accessToken == null) {
       return SignUpView();
     }
+    final result = fetchWishList();
+    final isLoading = result.isLoading;
+    final isError = result.error;
+    final refetch=result.refetch;
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+    final wishList = result.foods;
+    WishlistController wishlistController=Get.find();
+   
     return Scaffold(
       appBar: AppBar(
         title: const Text("Wishlist"),
@@ -37,6 +41,10 @@ class WishlistView extends HookWidget {
             title: item.title,
             subtitle: item.description,
             price: item.price.toString(),
+            wC: wishlistController,
+            id: item.id,
+            refetch: refetch,
+            ctx: context
           );
         }),
       ),
@@ -48,6 +56,10 @@ class WishlistView extends HookWidget {
     required String title,
     required String subtitle,
     required String price,
+    required WishlistController wC,
+    required int id,
+    required Function refetch,
+    required BuildContext ctx
   }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -98,10 +110,39 @@ class WishlistView extends HookWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                // later remove from wishlist
+              onPressed: () async{
+              wC.removeOrAddWishList(id, refetch);
+                
+                ScaffoldMessenger.of(ctx).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    margin: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    backgroundColor: Colors.red.shade600,
+                    content: Row(
+                      children: [
+                        const Icon(Icons.delete, color: Colors.white),
+                        const SizedBox(width: 10),
+                        const Expanded(
+                          child: Text(
+                            'Item removed from your wishlist',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+
+
               },
-              icon: const Icon(Icons.favorite, color: Colors.red),
+              icon: const Icon(Icons.remove, color: Colors.red),
             ),
           ],
         ),

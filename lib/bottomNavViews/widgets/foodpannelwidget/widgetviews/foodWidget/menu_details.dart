@@ -5,6 +5,7 @@ import 'package:foodapp/cart/model/create_cart_model.dart';
 import 'package:foodapp/common/reusable_header.dart';
 import 'package:foodapp/homeproductList/controller/menu_item_controller.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class MenuDetails extends StatelessWidget {
   const MenuDetails({super.key});
@@ -35,7 +36,8 @@ class MenuDetails extends StatelessWidget {
               leading: IconButton(
                 onPressed: () {
                   menuItemController.clearFood();
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
+                  context.pop();
                 },
                 icon: Container(
                   height: 35,
@@ -307,12 +309,12 @@ class CartBottomSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: const [
               Text(
-                "2 items",
+                "3 items",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 4),
               Text(
-                "Price: \$12.00",
+                "Price: \$25.40",
                 style: TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],

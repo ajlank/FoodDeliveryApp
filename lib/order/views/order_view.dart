@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:foodapp/order/hooks/fetch/order_details_fetch.dart';
+import 'package:foodapp/utils/routes.dart';
+import 'package:foodapp/views/auth/sign_up_view.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class OrderView extends HookWidget {
@@ -8,14 +12,18 @@ class OrderView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+     final accessToken = GetStorage().read('accessToken');
+    if (accessToken == null) {
+      return SignUpView();
+    }
+    
     final result = fetchOrderDetails();
     final isLoading = result.isLoading;
     final isError = result.error;
 
+    final order = result.order;
     if (isLoading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return CircularProgressIndicator();
     }
 
     if (isError != null) {
@@ -24,7 +32,6 @@ class OrderView extends HookWidget {
       );
     }
 
-    final order = result.order;
     if (order.isEmpty) {
       return const Scaffold(
         body: Center(child: Text("No orders found")),
@@ -141,7 +148,11 @@ class OrderView extends HookWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigator.of(context).pushNamed(orderTrackRoute);
+                    context.push(orderTrackRoute);
+                    // context.push(mapScreenRoute);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -154,6 +165,11 @@ class OrderView extends HookWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 12,
+              ),
+
+            
             ],
           ),
         ),

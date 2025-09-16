@@ -41,10 +41,8 @@ OrderResult fetchOrderDetails({String status = "pending"}) {
   }
 
   useEffect(() {
-    if (accessToken != null) {
-      fetchData();
-    }
-    return;
+    fetchData();
+      return;
   }, const []);
 
   void refetch() {

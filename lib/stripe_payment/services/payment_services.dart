@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:foodapp/cart/model/cart_model.dart';
-import 'package:foodapp/order/model/create_order_model.dart';
-import 'package:foodapp/stripe_payment/constsval/consts.dart';
+// import 'package:foodapp/stripe_payment/constsval/consts.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -54,7 +53,7 @@ class PaymentServices {
       var response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
-          'Authorization': 'Bearer 122121',
+          'Authorization': 'Bearer 1212',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: body,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:foodapp/address/hooks/fetch/fetch_default_address.dart';
 import 'package:foodapp/bottomNavViews/widgets/homeTopPannel/home_top_pannel.dart';
+import 'package:foodapp/utils/routes.dart';
 import 'package:foodapp/utils/styles.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeTopWidget extends HookWidget {
   const HomeTopWidget({super.key});
@@ -111,15 +113,20 @@ class HomeTopWidget extends HookWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.search, color: Styles.textWhiteColor),
-                      SizedBox(width: 6),
-                      Text(
-                        'Search here..',
-                        style: TextStyle(color: Styles.textWhiteColor),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      context.push(searchRoute);
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.search, color: Styles.textWhiteColor),
+                        SizedBox(width: 6),
+                        Text(
+                          'Search here..',
+                          style: TextStyle(color: Styles.textWhiteColor),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                     width: 80,

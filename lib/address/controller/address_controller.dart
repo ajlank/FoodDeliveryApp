@@ -3,6 +3,7 @@ import 'package:foodapp/address/model/address_model.dart';
 import 'package:foodapp/utils/ApiError/api_error.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 class AddressController extends GetxController {
@@ -90,7 +91,7 @@ class AddressController extends GetxController {
 
       if (response.statusCode == 201) {
         refetchA();
-        Navigator.of(context).pop();
+       context.pop();
       }
     } catch (e) {
       print(e.toString());

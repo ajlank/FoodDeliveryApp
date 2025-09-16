@@ -7,6 +7,7 @@ import 'package:foodapp/utils/styles.dart';
 import 'package:foodapp/wishlist/controller/wishlist_controller.dart';
 import 'package:foodapp/wishlist/hooks/fetch/fetch_wishlist.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class FoodCardList extends HookWidget {
   const FoodCardList({super.key, required this.foods});
@@ -22,7 +23,8 @@ class FoodCardList extends HookWidget {
     return GestureDetector(
       onTap: () {
         menuItemController.setFood(foods);
-        Navigator.of(context).pushNamed(menuDetailsRoute);
+        // Navigator.of(context).pushNamed(menuDetailsRoute);
+        context.push(menuDetailsRoute);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 17),
@@ -73,6 +75,33 @@ class FoodCardList extends HookWidget {
                 child: GestureDetector(
                   onTap: () {
                     wishlistController.removeOrAddWishList(foods.id, refetch);
+                   ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        margin: const EdgeInsets.all(16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        backgroundColor: Colors.green.shade600,
+                        content: Row(
+                          children: [
+                            const Icon(Icons.favorite, color: Colors.white),
+                            const SizedBox(width: 10),
+                            const Expanded(
+                              child: Text(
+                                'Item added to your wishlist!',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+
                   },
                   child: Container(
                     height: 40,

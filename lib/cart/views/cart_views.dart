@@ -7,7 +7,6 @@ import 'package:foodapp/cart/controller/cart_controller.dart';
 import 'package:foodapp/cart/hooks/fetch/fetch_cart.dart';
 import 'package:foodapp/cart/views/cart_counter.dart';
 import 'package:foodapp/stripe_payment/services/payment_services.dart';
-import 'package:foodapp/stripe_payment/services/stripe_service.dart';
 import 'package:get/get.dart';
 
 class CartViews extends HookWidget {
@@ -22,16 +21,17 @@ class CartViews extends HookWidget {
     final refetch = result.refetch;
     
     final resultad=fetchDefaultAddress();
-    final isLoading_g=resultad.isLoading;
+    final isloadingG=resultad.isLoading;
 
     CartController ct = Get.put(CartController());
     
-    if (isLoading && isLoading_g) {
+    if (isLoading && isloadingG) {
       return Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     final cart = result.cart;
     final address=resultad.address!.address;
     final addressId=resultad.address!.id;
+    
     final total = cart.fold<double>(
       0.0,
       (sum, item) => sum + (item.quantity * item.product.price),
@@ -59,7 +59,7 @@ class CartViews extends HookWidget {
       ),
       body: Column(
         children: [
-          AddressView(),
+          (cart.isNotEmpty)? AddressView():SizedBox.shrink(),
           SizedBox(height: 12),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -151,7 +151,7 @@ class CartViews extends HookWidget {
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
         ),
-        child: Row(
+        child:  (cart.isNotEmpty)? Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -185,7 +185,7 @@ class CartViews extends HookWidget {
               ),
             ),
           ],
-        ),
+        ):SizedBox.shrink(),
       ),
     );
   }

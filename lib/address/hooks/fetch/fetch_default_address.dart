@@ -34,10 +34,8 @@ DefaultAddressResult fetchDefaultAddress() {
   }
 
   useEffect(() {
-    if (accessToken != null) {
-      fetchData();
-    }
-    return null;
+    fetchData();
+      return null;
   }, const []);
   void refetch() {
     isLoading.value = false;
