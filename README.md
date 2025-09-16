@@ -31,7 +31,7 @@ The app offers a smooth ordering experience with real-time notifications and sec
 
 | Login | Home View | Menu Details | Order Tracking | Cart | Stripe Checkout | Order Details | Location Tracking |
 |-------|-----------|--------------|----------------|------|----------------|---------------|-----------------|
-| ![Login Screen](assets/s.png) | ![Home View](assets/s3.png) | ![Menu Details](assets/s4.png) | ![Order Tracking](assets/s5.png) | ![Cart](assets/s6.png) | ![Stripe Checkout](assets/s7.png) | ![Order Details](assets/s8.png) | ![Location Tracking](assets/s9.png) |
+| ![Login Screen](lib/assets/s.png) | ![Home View](lib/assets/s3.png) | ![Menu Details](lib/assets/s4.png) | ![Order Tracking](lib/assets/s5.png) | ![Cart](lib/assets/s6.png) | ![Stripe Checkout](lib/assets/s7.png) | ![Order Details](lib/assets/s8.png) | ![Location Tracking](lib/assets/s9.png) |
 
 
 ---
