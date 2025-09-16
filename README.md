@@ -1,16 +1,46 @@
-# foodapp
+# 🍔 Food Delivery App
 
-A new Flutter project.
+Alhamdulillah — I developed a **Food Delivery App** using **Flutter** (frontend), **Django REST** (backend / orders), **Firebase** (push notifications), and **Stripe** (payments).  
+The app offers a smooth ordering experience with real-time notifications and secure online payments.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Tech Stack
 
-A few resources to get you started if this is your first Flutter project:
+- **Frontend:** Flutter  
+- **Backend:** Django REST Framework  
+- **Push Notifications:** Firebase Cloud Messaging (FCM)  
+- **Payments:** Stripe  
+- **Database:** SQLite (via Django ORM)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Features
+
+- User authentication using access token & profile management  
+- Browse restaurants & menu details  
+- Add to cart & place orders  
+- Order tracking & order details view  
+- Real-time push notifications (FCM)  
+- Secure Stripe payment checkout  
+- Location tracking for delivery
+
+---
+
+## 📸 Screenshots
+
+| Login | Home View | Menu Details | Order Tracking | Cart | Stripe Checkout | Order Details | Location Tracking |
+|-------|-----------|--------------|----------------|------|------------------|---------------|-------------------|
+| ![](assets/s.png) | ![](assets/s3.png) | ![](assets/s4.png) | ![](assets/s5.png) | ![](assets/s6.png) | ![](assets/s7.png) | ![](assets/s8.png) | ![](assets/s9.png) |
+
+> **Image paths:** `assets/s.png`, `assets/s3.png`, `assets/s4.png`, `assets/s5.png`, `assets/s6.png`, `assets/s7.png`, `assets/s8.png`, `assets/s9.png`
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone
+```bash
+git clone https://github.com/ajlank/FoodDeliveryApp.git
+cd fooddeliveryapp
+cd fooddeliveryapp
